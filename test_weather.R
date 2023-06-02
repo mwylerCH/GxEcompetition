@@ -5,7 +5,7 @@ library(tidyverse)
 library(data.table)
 
 weather_test <-fread(data.table = F, 
-                      'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Testing_Data-20221128T125744Z-001/Testing_Data/4_Testing_Weather_Data_2022.csv')
+                      'Testing_Data-20221128T125744Z-001/Testing_Data/4_Testing_Weather_Data_2022.csv')
 
 str(weather_test) # 26 unique Env, 16 numeric variables without NAs, 1 column with the date
 summary(weather_test)
@@ -128,4 +128,4 @@ season_weather$VPD <- as.data.frame(tapply(weather_test$VPD[format(weather_test$
                                               weather_test$Env[format(weather_test$Date,"%m") %in% c("03", "04", "05", "06", "07", "08", "09", "10")], mean))[,1]
 
 
-write.csv(season_weather, 'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Testing_Data-20221128T125744Z-001/Testing_Data/test_weather.csv')
+write.csv(season_weather, 'Testing_Data-20221128T125744Z-001/Testing_Data/test_weather.csv')
