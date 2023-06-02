@@ -5,25 +5,16 @@ library(tidyverse)
 library(data.table)
 
 soil_test <- fread(data.table = F, 
-                    'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Testing_Data-20221128T125744Z-001/Testing_Data/3_Testing_Soil_Data_2022.csv')
+                    'Testing_Data-20221128T125744Z-001/Testing_Data/3_Testing_Soil_Data_2022.csv')
 soil_train <- fread(data.table = F, 
-                   'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Training_Data-20221128T125754Z-001/Training_Data/Train_Soil_Data.csv')
+                   'Training_Data-20221128T125754Z-001/Training_Data/Train_Soil_Data.csv')
 test_trait <- fread(data.table = F, 
-                    'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Testing_Data-20221128T125744Z-001/Testing_Data/1_Submission_Template_2022.csv')
+                    'Testing_Data-20221128T125744Z-001/Testing_Data/1_Submission_Template_2022.csv')
 
 
 ### SOIL ----------------
 
-str(soil_test)
-
-# # remove variables with too many NAs, more then 1/3
-# mask <- rep(NA, ncol(soil_test))
-# for (i in 1:ncol(soil_test)){
-#   mask[i] <- sum(is.na(soil_test[,i]))>0.3*nrow(soil_test)
-# }
-# soil_test <- soil_test[,!mask]
-
-# aim: have soil data for the years 2014-2021 for each location!
+# aim: have soil data for the years 2022 for each location!
 # imputation
 # create location column
 soil_test$Loc <- rep(NA, nrow(soil_test))
@@ -85,17 +76,6 @@ for (nc in 3:25) {
   }
 }
 
-# # substitute NaN with colmean
-# for (nc in 6:28) {
-#   for (nr in c(1:162,164:nrow(soil_tot))){ # there are no records for the location TXH4_!!
-#     if (is.nan(soil_tot[nr,nc])){
-#       VAR <- colnames(soil_tot)[nc]
-#       soil_tot[nr,nc] <- mean(loc_means[,VAR], na.rm = TRUE)
-#     } else {
-#       soil_tot[nr,nc] <- soil_tot[nr,nc]
-#     }
-#   }
-# }
 
 # set factors in soil_test
 for (j in 1:5){
@@ -110,12 +90,9 @@ for (j in 1:3){
 }
 
 
-# # remove variable which are not agronomically important, not important or makes no sense
-# remove <- c( 3,4,5, 29,30)
-# soil_tot <- soil_tot[, - (remove)]
 
 # # remove NAs
  soil_tot <- na.omit(soil_tot)
 
 # # save the df
-write.csv(soil_tot, 'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Testing_Data-20221128T125744Z-001/Testing_Data/test_soil.csv')
+write.csv(soil_tot, 'Testing_Data-20221128T125744Z-001/Testing_Data/test_soil.csv')
