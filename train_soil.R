@@ -5,7 +5,7 @@ library(tidyverse)
 library(data.table)
 
 soil_train <- fread(data.table = F, 
-                    'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Training_Data-20221128T125754Z-001/Training_Data/3_Training_Soil_Data_2015_2021.csv')
+                    'Training_Data-20221128T125754Z-001/Training_Data/3_Training_Soil_Data_2015_2021.csv')
 
 ### SOIL ----------------
 
@@ -111,4 +111,4 @@ soil_tot <- soil_tot[, - (remove)]
  soil_tot <- na.omit(soil_tot)
 
 # # save the df
-write.csv(soil_tot, 'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Training_Data-20221128T125754Z-001/Training_Data/Train_Soil_Data.csv')
+write.csv(soil_tot, 'Training_Data-20221128T125754Z-001/Training_Data/Train_Soil_Data.csv')
