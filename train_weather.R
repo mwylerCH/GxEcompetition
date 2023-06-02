@@ -5,7 +5,7 @@ library(tidyverse)
 library(data.table)
 
 weather_train <-fread(data.table = F, 
-                      'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Training_Data-20221128T125754Z-001/Training_Data/4_Training_Weather_Data_2014_2021.csv')
+                      'Training_Data-20221128T125754Z-001/Training_Data/4_Training_Weather_Data_2014_2021.csv')
 
 str(weather_train) # 212 unique Env, 16 numeric variables without NAs, 1 column with the date
 summary(weather_train)
@@ -33,7 +33,7 @@ date_length <- tapply(weather_train$Date, weather_train$Env, length)
 # ==> daily measurement for the whole year
 
 ### summarise variables pro Env -----------
-#=> thermal time(from seeding day) , cumulative precipitation (from ?)
+#=> thermal time, cumulative precipitation (from ?)
 # see script crop phenotyping
 
 season_weather <- data.frame(prec_mean = rep(NA, length(unique(weather_train$Env))), prec_cum = rep(NA, length(unique(weather_train$Env))),
@@ -50,7 +50,7 @@ season_weather$prec_mean <- as.data.frame(tapply(weather_train$PRECTOTCORR[forma
 season_weather$T_mean <- as.data.frame(tapply(weather_train$T2M[format(weather_train$Date,"%m")%in% c("03", "04", "05", "06", "07", "08", "09", "10")],
                                               weather_train$Env[format(weather_train$Date,"%m") %in% c("03", "04", "05", "06", "07", "08", "09", "10")], mean))[,1]
 
-# yearly cumulative precipitation until october
+# 2022 cumulative precipitation until october
 res <- data.frame(Env=NA, cum=NA)
 for (i in unique(weather_train$Env)) {
   a <- as.data.frame(weather_train$PRECTOTCORR[weather_train$Env==i & format(weather_train$Date,"%m")%in% c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10")])
@@ -124,4 +124,4 @@ season_weather$VPD <- as.data.frame(tapply(weather_train$VPD[format(weather_trai
                                               weather_train$Env[format(weather_train$Date,"%m") %in% c("03", "04", "05", "06", "07", "08", "09", "10")], mean))[,1]
 
 
-write.csv(season_weather, 'C:/Users/Ulrich Argeo/OneDrive - Pure Production AG/Documents/ARGEO/Maize_Competition/Training_Data-20221128T125754Z-001/Training_Data/train_weather.csv')
+write.csv(season_weather, 'Training_Data-20221128T125754Z-001/Training_Data/train_weather.csv')
