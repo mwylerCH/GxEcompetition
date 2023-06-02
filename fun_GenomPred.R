@@ -231,32 +231,3 @@ f.dcalc <- function(genoTable){
   return(d)
 }
 
-
-
-### Outliers function --------------
-# 
-# # remove outliers from a df of a specific trait
-# # it is not perfect working this function, needs improvemente
-# f.outl <- function(df,trait){
-#   if (!length(grep('GID', colnames(df))) == 1){
-#     stop('No GID column found')
-#   }else{
-#     # identify dup GID
-#     
-#     # subset table only duplicated
-#     
-#     # calcola sui subset DF
-#     df$z <- ave(df[,trait], df$GID, FUN = scale)
-#     z_out <- which(df$z >= 3.5 | df$z <= -3.5)
-#     df <-  df[-(z_out), ]
-#     df$z <- NULL
-#     # combine tables (uniq + subset)
-#     
-#     return(df)
-#   }
-# }
-# 
-# f.outl(tunnelLong, 'conc_THCA')
-# f.outl(tunnelRaw, 'conc_THCA')
-# f.outl(testino, 'conc_THCA')
-
